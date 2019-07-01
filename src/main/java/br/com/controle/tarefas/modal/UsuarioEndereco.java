@@ -22,22 +22,22 @@ public class UsuarioEndereco implements Serializable{
 	@EmbeddedId
 	private UsuarioEnderecoId usuarioEnderecoId;
 	
-	@Column(name = "ENDERECO", nullable = false)
+	@Column(name = "ENDERECO", nullable = true)
 	private String descEndereco;
 	
-	@Column(name = "NUMERO_ENDERECO", nullable = false)
+	@Column(name = "NUMERO_ENDERECO", nullable = true)
 	private Integer numeroEndereco;
 	
-	@Column(name = "CEP", nullable = false)
+	@Column(name = "CEP", nullable = true)
 	private Integer cepEndereco;
 	
-	@Column(name = "CIDADE", nullable = false)
+	@Column(name = "CIDADE", nullable = true)
 	private String cidadeEndereco;
 	
-	@Column(name = "UF", nullable = false)
+	@Column(name = "UF", nullable = true)
 	private String ufEndereco;
 	
-	@Column(name = "COMPLEMENTO", nullable = false)
+	@Column(name = "COMPLEMENTO", nullable = true)
 	private String complementoEndereco;
 	
 }

@@ -8,9 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import br.com.controle.tarefas.modal.id.UsuarioId;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "USUARIO")
+@Getter
+@Setter
 public class Usuario implements Serializable{
 
 	private static final long serialVersionUID = -6208467850254555763L;
