@@ -7,8 +7,9 @@ import lombok.Setter;
 @Setter
 public class UsuarioDTO {
 
-	private Integer idUsuarioDTO;
-	private Integer idCargoDTO;
+	private Long idUsuarioDTO;
+	private Long idCargoDTO;
+	
 	private String nomeUsuarioDTO;
 	
 	private UsuarioEnderecoDTO enderecoDTO;

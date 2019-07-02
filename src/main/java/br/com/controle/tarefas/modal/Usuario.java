@@ -1,10 +1,11 @@
 package br.com.controle.tarefas.modal;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import br.com.controle.tarefas.modal.id.UsuarioId;
@@ -12,17 +13,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "usuario")
+@IdClass(UsuarioId.class)
 @Getter
 @Setter
-public class Usuario implements Serializable{
-
-	private static final long serialVersionUID = -6208467850254555763L;
+public class Usuario{
 	
-	@EmbeddedId
-	private UsuarioId usuarioId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
+	private Long idUsuario;
 	
-	@Column(name = "NOME_USUARIO", nullable = true)
+	@Id
+	@Column(name = "id_cargo")
+	private Long idCargo;
+	
+	@Column(name = "nome_usuario", nullable = true)
 	private String nomeUsuario;
 	
 }

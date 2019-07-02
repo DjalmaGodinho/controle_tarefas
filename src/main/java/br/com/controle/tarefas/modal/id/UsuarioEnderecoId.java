@@ -1,19 +1,17 @@
 package br.com.controle.tarefas.modal.id;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Embeddable
-public class UsuarioEnderecoId {
+public class UsuarioEnderecoId implements Serializable{
 
-	@Column(name = "ID_ENDERECO", nullable = false)
-	private Integer idEndereco;
+	private static final long serialVersionUID = 4049746172103239003L;
+
+	private Long idEndereco;
+	private Long idUsuario;
 	
-	@Column(name = "ID_USUARIO", nullable = false)
-	private Integer idUsuario;
 }

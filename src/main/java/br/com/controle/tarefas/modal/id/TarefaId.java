@@ -1,5 +1,7 @@
 package br.com.controle.tarefas.modal.id;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -9,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class TarefaId {
+public class TarefaId implements Serializable{
 
 	@Column(name = "ID_TAREFA")
 	private Integer idTarega;

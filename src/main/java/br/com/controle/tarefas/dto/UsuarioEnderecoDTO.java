@@ -7,12 +7,12 @@ import lombok.Setter;
 @Setter
 public class UsuarioEnderecoDTO {
 
-	private Integer idUsuarioDTO;
-	private Integer numeroEndereco;
-	private Integer cepDTO;
+	private Long idUsuarioDTO;
+	private Long numeroEnderecoDTO;
+	private Long cepDTO;
 	
 	private String enderecoDTO;
 	private String cidadeDTO;
-	private String uf;
-	private String complemento;
+	private String ufDTO;
+	private String complementoDTO;
 }

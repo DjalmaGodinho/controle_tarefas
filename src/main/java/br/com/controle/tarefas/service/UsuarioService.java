@@ -2,7 +2,10 @@ package br.com.controle.tarefas.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import br.com.controle.tarefas.dto.UsuarioDTO;
@@ -32,11 +35,19 @@ public class UsuarioService {
 		validarDTO(usuarioDTO, true);
 		
 		Usuario usuario = montarObjetoUsuario(usuarioDTO);
-		usuario = repository.saveAndFlush(usuario);
+		usuario = salvarUsuario(usuario);
 		
-		usuarioEnderecoService.salvarEnderecoUsuario(usuarioDTO, usuario.getUsuarioId());
+		Example<Usuario> ex = Example.of(usuario);
+		List<Usuario> list = repository.findAll(ex);
+		
+		usuarioEnderecoService.salvarEnderecoUsuario(usuarioDTO, usuario.getIdUsuario());
 		
 		return usuario;
+	}
+
+	@Transactional
+	public Usuario salvarUsuario(Usuario usuario) {
+		return repository.save(usuario);
 	}
 
 	private void validarDTO(UsuarioDTO usuarioDTO, boolean isIncluirUsuario) throws ControleTarefasException {
@@ -53,11 +64,9 @@ public class UsuarioService {
 	
 	private Usuario montarObjetoUsuario(UsuarioDTO usuarioDTO) {
 		Usuario usuario = new Usuario();
-		UsuarioId usuarioId = new UsuarioId();
 		
-		usuarioId.setIdUsuario(usuarioDTO.getIdUsuarioDTO());
-		usuarioId.setIdCargo(usuarioDTO.getIdCargoDTO());
-		usuario.setUsuarioId(usuarioId);
+		usuario.setIdUsuario(usuarioDTO.getIdUsuarioDTO());
+		usuario.setIdCargo(usuarioDTO.getIdCargoDTO());
 		usuario.setNomeUsuario(usuarioDTO.getNomeUsuarioDTO());
 		
 		return usuario;

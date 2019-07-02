@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import br.com.controle.tarefas.dto.UsuarioDTO;
 import br.com.controle.tarefas.dto.UsuarioEnderecoDTO;
 import br.com.controle.tarefas.modal.UsuarioEndereco;
-import br.com.controle.tarefas.modal.id.UsuarioEnderecoId;
-import br.com.controle.tarefas.modal.id.UsuarioId;
 import br.com.controle.tarefas.repository.UsuarioEnderecoRepository;
 
 @Service
@@ -20,32 +18,25 @@ public class UsuarioEnderecoService {
 		this.repository = repository;
 	}
 
-	public void salvarEnderecoUsuario(UsuarioDTO usuarioDTO, UsuarioId usuarioId) {
+	public void salvarEnderecoUsuario(UsuarioDTO usuarioDTO, Long idUsuario) {
 		if(usuarioDTO.getEnderecoDTO() != null) {
-			UsuarioEndereco endereco = montarObjetoEnderecoUsuario(usuarioDTO.getEnderecoDTO(), usuarioId);
+			UsuarioEndereco endereco = montarObjetoEnderecoUsuario(usuarioDTO.getEnderecoDTO(), idUsuario);
 			repository.saveAndFlush(endereco);
 		}
 	}
 
-	private UsuarioEndereco montarObjetoEnderecoUsuario(UsuarioEnderecoDTO enderecoDTO, UsuarioId usuarioId) {
+	private UsuarioEndereco montarObjetoEnderecoUsuario(UsuarioEnderecoDTO enderecoDTO, Long idUsuario) {
 		UsuarioEndereco endereco = new UsuarioEndereco();
-		UsuarioEnderecoId enderecoId = montarObjetoEnderecoUsuarioId(usuarioId);
 		
-		endereco.setUsuarioEnderecoId(enderecoId);
+		endereco.setIdUsuario(idUsuario);
 		endereco.setDescEndereco(enderecoDTO.getEnderecoDTO());
-		endereco.setNumeroEndereco(enderecoDTO.getNumeroEndereco());
+		endereco.setNumeroEndereco(enderecoDTO.getNumeroEnderecoDTO());
 		endereco.setCepEndereco(enderecoDTO.getCepDTO());
 		endereco.setCidadeEndereco(enderecoDTO.getCidadeDTO());
-		endereco.setUfEndereco(enderecoDTO.getUf());
-		endereco.setComplementoEndereco(enderecoDTO.getComplemento());
+		endereco.setUfEndereco(enderecoDTO.getUfDTO());
+		endereco.setComplementoEndereco(enderecoDTO.getComplementoDTO());
 		
 		return endereco;
-	}
-
-	private UsuarioEnderecoId montarObjetoEnderecoUsuarioId(UsuarioId usuarioId) {
-		UsuarioEnderecoId enderecoId = new UsuarioEnderecoId();
-		enderecoId.setIdUsuario(usuarioId.getIdUsuario());
-		return enderecoId;
 	}
 	
 }
